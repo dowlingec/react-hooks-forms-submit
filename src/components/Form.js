@@ -4,6 +4,17 @@ function Form() {
   const [firstName, setFirstName] = useState("Sylvia");
   const [lastName, setLastName] = useState("Woods");
 
+  function handleSumbit(event) {
+    event.preventDefault();
+    const formData ={
+      firstName: firstName,
+      lastName: lastName,
+    };
+    props.sendFormDataSomewhere(formData);
+    setFirstName("");
+    setLastName("");
+  }
+
   function handleFirstNameChange(event) {
     setFirstName(event.target.value);
   }
@@ -13,7 +24,7 @@ function Form() {
   }
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <input type="text" onChange={handleFirstNameChange} value={firstName} />
       <input type="text" onChange={handleLastNameChange} value={lastName} />
       <button type="submit">Submit</button>
